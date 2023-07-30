@@ -22,7 +22,7 @@ public class Employee {
     /**電話番号 */
     private String telephone;
     /**給料 */
-    private Integer salaly;
+    private Integer salary;
     /**特製 */
     private String characteristics;
     /**扶養人数 */
@@ -44,12 +44,12 @@ public class Employee {
      * @param zipCode
      * @param address
      * @param telephone
-     * @param salaly
+     * @param salary
      * @param characteristics
      * @param dependentsCount
      */
     public Employee(Integer id, String name, String image, String gender, Date hireDate, String mailAddress,
-            String zipCode, String address, String telephone, Integer salaly, String characteristics,
+            String zipCode, String address, String telephone, Integer salary, String characteristics,
             Integer dependentsCount) {
         this.id = id;
         this.name = name;
@@ -60,7 +60,7 @@ public class Employee {
         this.zipCode = zipCode;
         this.address = address;
         this.telephone = telephone;
-        this.salaly = salaly;
+        this.salary = salary;
         this.characteristics = characteristics;
         this.dependentsCount = dependentsCount;
     }
@@ -120,11 +120,11 @@ public class Employee {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
-    public Integer getSalaly() {
-        return salaly;
+    public Integer getSalary() {
+        return salary;
     }
-    public void setSalaly(Integer salaly) {
-        this.salaly = salaly;
+    public void setSalary(Integer salary) {
+        this.salary = salary;
     }
     public String getCharacteristics() {
         return characteristics;

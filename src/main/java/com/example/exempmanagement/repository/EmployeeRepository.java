@@ -28,7 +28,8 @@ public class EmployeeRepository {
         employee.setMailAddress(rs.getString("mail_address"));
         employee.setZipCode(rs.getString("zip_code"));
         employee.setAddress(rs.getString("address"));
-        employee.setSalaly(rs.getInt("salary"));
+        employee.setTelephone(rs.getString("telephone"));
+        employee.setSalary(rs.getInt("salary"));
         employee.setCharacteristics(rs.getString("characteristics"));
         employee.setDependentsCount(rs.getInt("dependents_count"));
         return employee;
@@ -41,7 +42,7 @@ public class EmployeeRepository {
      */
     public List<Employee> findAll() {
         String findAllSql = 
-            "SELECT id, name, image, gender, hire_date, mail_address, zip_code, address, salary, characteristics, dependents_count " + 
+            "SELECT id, name, image, gender, hire_date, mail_address, zip_code, address, telephone, salary, characteristics, dependents_count " + 
             "FROM employees ORDER BY hire_date DESC";
         List<Employee> employeeList = new ArrayList<>();
         employeeList = template.query(findAllSql, EMPLOYEE_ROW_MAPPER);
@@ -56,7 +57,7 @@ public class EmployeeRepository {
      */
     public Employee load(Integer id) {
         String loadSql = 
-            "SELECT id, name, image, gender, hire_date, mail_address, zip_code, address, salary, characteristics, dependents_count " + 
+            "SELECT id, name, image, gender, hire_date, mail_address, zip_code, address, telephone, salary, characteristics, dependents_count " + 
             "FROM employees WHERE id = :id";
         SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
         Employee employee = template.queryForObject(loadSql, param, EMPLOYEE_ROW_MAPPER);
@@ -72,7 +73,7 @@ public class EmployeeRepository {
         String updateSql = 
             "UPDATE employees " + 
             "SET name = :name, image = :image, gender = :gender, hire_date = :hireDate, mail_address = :mailAddress, zip_code = :zipCode, " +
-                "address = :address, salary = :salary, characteristics = :characteristics, dependents_count = :dependentsCount" + 
+                "address = :address, telephone = :telephone, salary = :salary, characteristics = :characteristics, dependents_count = :dependentsCount" + 
             "WHERE id = :id";
         SqlParameterSource param = 
             new MapSqlParameterSource()
@@ -83,7 +84,8 @@ public class EmployeeRepository {
                 .addValue("mailAddress", employee.getMailAddress())
                 .addValue("zipCode", employee.getZipCode())
                 .addValue("address", employee.getAddress())
-                .addValue("salary", employee.getSalaly())
+                .addValue("telephone", employee.getTelephone())
+                .addValue("salary", employee.getSalary())
                 .addValue("characteristics", employee.getCharacteristics())
                 .addValue("dependentsCount", employee.getDependentsCount())
                 .addValue("id", employee.getId());
