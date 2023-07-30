@@ -44,5 +44,10 @@ public class AdministratorContorller {
         return "redirect:/employee/showList";
     }
 
+    @GetMapping("/logout")
+    public String logout(LoginForm form) {
+        session.invalidate();
+        return "redirect:/";
+    }
 
 }
