@@ -23,7 +23,7 @@ public class AdministratorRepository {
         Administrator admin = new Administrator();
         admin.setId(rs.getInt("id"));
         admin.setName(rs.getString("name"));
-        admin.setMailAddress(rs.getString("mailAddress"));
+        admin.setMailAddress(rs.getString("mail_address"));
         admin.setPassword(rs.getString("password"));
         return admin;
     };
@@ -56,7 +56,7 @@ public class AdministratorRepository {
      * @return
      */
     public Administrator findByMailAddressAndPassword(String mailAddress, String password) {
-        String findSql = "SELECT id, name, mail_address, password FROM administorators WHERE mail_address = :mailAddress AND password = :password;";
+        String findSql = "SELECT id, name, mail_address, password FROM administrators WHERE mail_address = :mailAddress AND password = :password;";
         SqlParameterSource param = 
             new MapSqlParameterSource()
                 .addValue("mailAddress", mailAddress)
