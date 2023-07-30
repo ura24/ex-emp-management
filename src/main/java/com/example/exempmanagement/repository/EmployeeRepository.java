@@ -1,6 +1,5 @@
 package com.example.exempmanagement.repository;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class EmployeeRepository {
         employee.setName(rs.getString("name"));
         employee.setImage(rs.getString("image"));
         employee.setGender(rs.getString("gender"));
-        employee.setHireDate(Date.valueOf(rs.getString("hire_date")));
+        employee.setHireDate(rs.getDate("hire_date"));
         employee.setMailAddress(rs.getString("mail_address"));
         employee.setZipCode(rs.getString("zip_code"));
         employee.setAddress(rs.getString("address"));
@@ -42,8 +41,8 @@ public class EmployeeRepository {
      */
     public List<Employee> findAll() {
         String findAllSql = 
-            "SELECT id, name, image, gender, hire_date, mail_address, zip_code, adderss, salary, charracteristics, dependents_count " + 
-            "FROM employees ORDER BY hire_date DISC";
+            "SELECT id, name, image, gender, hire_date, mail_address, zip_code, address, salary, characteristics, dependents_count " + 
+            "FROM employees ORDER BY hire_date DESC";
         List<Employee> employeeList = new ArrayList<>();
         employeeList = template.query(findAllSql, EMPLOYEE_ROW_MAPPER);
         return employeeList;
@@ -57,7 +56,7 @@ public class EmployeeRepository {
      */
     public Employee load(Integer id) {
         String loadSql = 
-            "SELECT id, name, image, gender, hire_date, mail_address, zip_code, adderss, salary, charracteristics, dependents_count " + 
+            "SELECT id, name, image, gender, hire_date, mail_address, zip_code, address, salary, characteristics, dependents_count " + 
             "FROM employees WHERE id = :id";
         SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
         Employee employee = template.queryForObject(loadSql, param, EMPLOYEE_ROW_MAPPER);
@@ -73,7 +72,7 @@ public class EmployeeRepository {
         String updateSql = 
             "UPDATE employees " + 
             "SET name = :name, image = :image, gender = :gender, hire_date = :hireDate, mail_address = :mailAddress, zip_code = :zipCode, " +
-                "address = :address, salary = :salary, charracteristics = :charracteristics, dependents_count = :dependentsCount" + 
+                "address = :address, salary = :salary, characteristics = :characteristics, dependents_count = :dependentsCount" + 
             "WHERE id = :id";
         SqlParameterSource param = 
             new MapSqlParameterSource()
@@ -85,7 +84,7 @@ public class EmployeeRepository {
                 .addValue("zipCode", employee.getZipCode())
                 .addValue("address", employee.getAddress())
                 .addValue("salary", employee.getSalaly())
-                .addValue("charracteristics", employee.getCharacteristics())
+                .addValue("characteristics", employee.getCharacteristics())
                 .addValue("dependentsCount", employee.getDependentsCount())
                 .addValue("id", employee.getId());
         template.update(updateSql, param);

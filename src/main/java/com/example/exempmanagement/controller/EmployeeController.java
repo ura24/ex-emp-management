@@ -23,7 +23,7 @@ public class EmployeeController {
      * @param model 画面にデータを渡すために使用
      * @return 従業員一覧画面
      */
-    @GetMapping("showList")
+    @GetMapping("/showList")
     public String showList(Model model) {
         List<Employee> employeeList = employeeService.showList();
         model.addAttribute("employeeList", employeeList);
