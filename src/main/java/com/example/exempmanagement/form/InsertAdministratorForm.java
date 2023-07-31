@@ -1,11 +1,18 @@
 package com.example.exempmanagement.form;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
 public class InsertAdministratorForm {
     /**名前 */
+    @NotBlank(message = "氏名を入力してください")
     private String name;
     /**メールアドレス */
+    @NotBlank(message = "メールアドレスを入力してください")
+    @Email(message = "メールアドレスの形式で入力してください")
     private String mailAddress;
     /**パスワード */
+    @NotBlank(message = "パスワードを入力してください")
     private String password;
     
     public String getName() {
